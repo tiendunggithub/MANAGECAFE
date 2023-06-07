@@ -1,0 +1,87 @@
+.content{
+    display: flex;
+    justify-content: space-between;
+    margin: 15px;
+}
+.table-coffee-list {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    gap: 24px;
+    padding: 12px 5px;
+}
+
+.table-coffee-list .red {
+    background-color: #f43f5e;
+}
+
+.table-coffee-list .blue {
+    background-color: #3b82f6;
+}
+
+.table-coffee-list .green {
+    background-color: #22c55e;
+}
+
+.table-coffee-list .card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    min-height: 100px;
+    width: 238px;
+    border-radius: 10px;
+    color: black;
+    cursor: pointer;
+    transition: 400ms;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.table-coffee-list .card .card-image {
+    width: 100% !important;
+    height: 10rem;
+    object-fit: cover !important;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    margin-top: -1px;
+}
+
+.table-coffee-list .card p.tip {
+    font-size: 1em;
+    font-weight: 700;
+}
+
+.table-coffee-list .card p.second-text {
+    font-size: .7em;
+}
+
+.table-coffee-list .card:hover {
+    transform: scale(1.1, 1.1);
+}
+
+/* .table-coffee-list:hover>.card:not(:hover) {
+    filter: blur(10px);
+    transform: scale(0.9, 0.9);
+} */
+
+.card-content {
+    padding-top: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.card-content .card-title {
+    font-size: 22px;
+    font-weight: 500;
+}
+
+.exist{
+    background: #db9292 !important;
+    color: white !important;
+}
+
+.table-status {
+    width: 24%;
+    background-color: #67ff9f;
+}
