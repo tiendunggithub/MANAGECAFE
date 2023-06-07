@@ -36,6 +36,7 @@
     cursor: pointer;
     transition: 400ms;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    overflow: hidden;
 }
 
 .table-coffee-list .card .card-image {
@@ -56,9 +57,9 @@
     font-size: .7em;
 }
 
-.table-coffee-list .card:hover {
+/* .table-coffee-list .card:hover {
     transform: scale(1.1, 1.1);
-}
+} */
 
 /* .table-coffee-list:hover>.card:not(:hover) {
     filter: blur(10px);
@@ -69,11 +70,39 @@
     padding-top: 10px;
     display: flex;
     align-items: center;
+    flex-direction: column;
+    transition: .5s;
 }
 
 .card-content .card-title {
     font-size: 22px;
     font-weight: 500;
+}
+
+.card-actions {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: absolute;
+    border-radius: 10px;
+    top: 0;
+    left: 0;
+    width: 60%;/*100%*/
+    height: 100%;
+    background: #fd7b1e;
+    transition: .5s;
+    transform-origin: left;
+    transform: perspective(2000px) rotateY(-90deg);
+    padding: 0 10px;
+}
+
+.card:hover .card-actions {
+    transform: perspective(2000px) rotateY(0deg);
+}
+
+.card:hover .card-content {
+    opacity: .5; /*làm mờ đen*/
+    transform: translateX(30%);
 }
 
 .exist{
@@ -85,3 +114,4 @@
     width: 24%;
     background-color: #67ff9f;
 }
+

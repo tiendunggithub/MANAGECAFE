@@ -5,8 +5,9 @@ module.exports = function (app) {
     let tablesCtrl = require('./controller/TableController');
 
     // todoList Routes
-    app.route('/tables')
-    .get(tablesCtrl.get);
+    app.route('/tables').get(tablesCtrl.get);
+
+    app.route('/tableDetails/:tableId').get(tablesCtrl.getDetails);
 
     app.route('/products')
         .get(productsCtrl.get)
