@@ -2,6 +2,9 @@
     display: flex;
     justify-content: space-between;
     margin: 15px;
+    overflow: hidden;
+    padding: 0 50px;
+    position:relative
 }
 .table-coffee-list {
     display: flex;
@@ -30,7 +33,8 @@
     flex-direction: column;
     text-align: center;
     min-height: 100px;
-    width: 238px;
+    height: 206px;
+    width: 245px;
     border-radius: 10px;
     color: black;
     cursor: pointer;
@@ -110,8 +114,38 @@
     color: white !important;
 }
 
-.table-status {
-    width: 24%;
+/* table-status */
+.table-status{
+    position: absolute;
+    right: 0;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 750px;
     background-color: #67ff9f;
+    padding: 12px 10px;
+    margin-top: 12px;
+    transform-origin: right;
+    transform: translateX(106%);
+    
 }
 
+.status-exist{
+    /* width: 750px; */
+    position: unset;
+    transition: .5s;
+    transform: translateX(0%) !important;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.table-status .status-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.table-status .status-header .status-title{
+    text-align: center;
+}
+
+.table-status table{
+    width: 100%;
+}

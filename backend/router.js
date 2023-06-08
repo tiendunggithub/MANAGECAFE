@@ -10,11 +10,13 @@ module.exports = function (app) {
     app.route('/tableDetails/:tableId').get(tablesCtrl.getDetails);
 
     app.route('/products')
-        .get(productsCtrl.get)
-        .post(productsCtrl.store);
+        .get(productsCtrl.get);
+        // .post(productsCtrl.store);
 
-    app.route('/products/:productId')
-        .get(productsCtrl.detail)
-        .put(productsCtrl.update)
-        .delete(productsCtrl.delete);
+    // app.route('/products/:productId')
+    //     .get(productsCtrl.detail)
+    //     .put(productsCtrl.update)
+    //     .delete(productsCtrl.delete);
+
+    app.route('/addItem/:idTbl').post(tablesCtrl.addItem);
 };

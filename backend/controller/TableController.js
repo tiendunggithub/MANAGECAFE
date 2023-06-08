@@ -15,22 +15,63 @@ module.exports = {
 
     getDetails: (req, res) => {
         let sql = '	SELECT '+
-                        ' PROD.name '+
-                        ' ,PROD.price '+
-                        ' ,PROD.quantity '+
-                        ' ,DETAILS.STARTTIME '+
-                        ' ,DETAILS.ENDTIME '+
-                    'FROM TABLE_DETAILS DETAILS '+
-                        ' INNER JOIN COFFEE_TABLE TAB   '+
-                        '    ON TAB.ID = DETAILS.TABLE              '+
-                        ' LEFT JOIN PRODUCT PROD        '+
-                        '    ON PROD.ID = DETAILS.PRODUCT           '+
-                    ' WHERE DETAILS.TABLE = ?'
+                        ' PROD.NAME                         '+
+                        ' ,PROD.PRICE                       '+
+                        ' ,DETAILS.QUANTITY                 '+
+                        ' ,convert_tz(DETAILS.STARTTIME,"+00:00","+7:00") as STARTTIME                '+
+                        ' ,DETAILS.ENDTIME                  '+
+                        ' ,TAB.NAME AS TABLENAME            '+
+                    'FROM TABLE_DETAILS DETAILS             '+
+                        ' INNER JOIN COFFEE_TABLE TAB       '+
+                        '    ON TAB.ID = DETAILS.TABLE      '+
+                        ' LEFT JOIN PRODUCT PROD            '+
+                        '    ON PROD.ID = DETAILS.PRODUCT   '+
+                    ' WHERE DETAILS.TABLE = ?               '+
+                    ' ORDER BY DETAILS.STARTTIME '
         let id = req.params.tableId
         db.query(sql, [id], (err, response) => {
             if(err) throw err
             res.json(response)
         })
-        
+    },
+
+    addItem: (req, res) => {
+        var date;
+        let sql = '	SELECT '+
+                        ' PROD.NAME                         '+
+                        ' ,PROD.PRICE                       '+
+                        ' ,DETAILS.QUANTITY                 '+
+                        ' ,DETAILS.STARTTIME                '+
+                        ' ,DETAILS.ENDTIME                  '+
+                        ' ,TAB.NAME AS TABLENAME            '+
+                    'FROM TABLE_DETAILS DETAILS             '+
+                        ' INNER JOIN COFFEE_TABLE TAB       '+
+                        '    ON TAB.ID = DETAILS.TABLE      '+
+                        ' LEFT JOIN PRODUCT PROD            '+
+                        '    ON PROD.ID = DETAILS.PRODUCT   '+
+                    ' WHERE DETAILS.TABLE = ?               '+
+                    ' ORDER BY DETAILS.STARTTIME '
+        let id = req.params.idTbl
+        db.query(sql, [id], (err, response) => {
+            if(err) throw err
+            if (response.length == 0) {
+                date = new Date();
+                date = date.getFullYear() + '-' +
+                ('00' + (date.getMonth()+1)).slice(-2) + '-' +
+                ('00' + date.getDate()).slice(-2) + ' ' + 
+                ('00' + date.getHours()).slice(-2) + ':' + 
+                ('00' + date.getMinutes()).slice(-2) + ':' + 
+                ('00' + date.getSeconds()).slice(-2);
+                console.log('date1: ', date);
+            } else {
+                date = response[0].STARTTIME
+            }
+            sql = "INSERT INTO `manage_cafe`.`table_details` (`PRODUCT`, `TABLE`, `STARTTIME`, `QUANTITY`) VALUES ('5', '1', ?, '10')";
+            
+            db.query(sql,[date], (err, response) => {
+                if(err) throw err
+                res.json(response)
+            })
+        })
     }
 }
