@@ -1,4 +1,3 @@
-console.log('script.js loaded');
 getCoffeeTable();
 
 async function getCoffeeTable() {
@@ -27,8 +26,6 @@ async function getCoffeeTable() {
                             '</div>'+
                             '<div class="card-actions">'+
                                 '<button class="btn btn-success" onclick="addItem('+data[i].ID+')">Thêm món</button>'+
-                                // '<button class="btn btn-success mt-2" onclick="detailsTable('+data[i].ID+')">Thông tin</button>'+
-                                // '<button class="btn btn-success mt-2" onclick="payTable('+data[i].id+')">Thanh toán</button>'+
                             '</div>'+
                         '</div>'
         }
@@ -40,12 +37,13 @@ async function detailsTable(id) {
     const res = await fetch('http://localhost:3000/tableDetails/'+id);
     const data = await res.json();
     
-    let header = '<tr>'+
+    let header = '<tr style="text-align: center">'+
                     '<th>STT</th>'+
                     '<th>Tên</th>'+
                     '<th>Đơn giá</th>'+
                     '<th>Số lượng</th>'+
                     '<th>Thành tiền</th>'+
+                    '<th>Chức năng</th>'+
                 '</tr>'
     let content = '';
     
@@ -55,9 +53,10 @@ async function detailsTable(id) {
         content += '<tr>'+
                         '<td>'+Number(i + 1)+'</td>'+
                         '<td>'+data[i].NAME+'</td>'+
-                        '<td>'+data[i].PRICE+'</td>'+
-                        '<td>'+data[i].QUANTITY+'</td>'+
-                        '<td>'+total+'</td>'+
+                        '<td style="text-align: end">'+data[i].PRICE+'</td>'+
+                        '<td style="text-align: center">'+data[i].QUANTITY+'</td>'+
+                        '<td style="text-align: end">'+total+'</td>'+
+                        '<td style="text-align: center"><i class="bi bi-trash-fill"></i></td>'+
                     '</tr>'
     }
     document.getElementById('itemLst').innerHTML = header + content;
@@ -73,23 +72,18 @@ function addItem(id){
 }
 
 async function addItem2(idTbl) {
-    // const resDetails = await fetch('http://localhost:3000/tableDetails/'+idTbl);
-    // const data = await resDetails.json();
-    
-    // var date;
-    // if (data.length == 0) {
-    //     date = new Date();
-    //     date = date.getFullYear() + '-' +
-    //     ('00' + (date.getMonth()+1)).slice(-2) + '-' +
-    //     ('00' + date.getDate()).slice(-2) + ' ' + 
-    //     ('00' + date.getHours()).slice(-2) + ':' + 
-    //     ('00' + date.getMinutes()).slice(-2) + ':' + 
-    //     ('00' + date.getSeconds()).slice(-2);
-    // } else {
-    //     date = data[0].STARTTIME
-    // }
-
-    const res = await fetch('http://localhost:3000/addItem'+idTbl)
-    const data2 = await res.json();
-
+    const options = {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            idProd: '2',
+            quantity: '3'
+        })
+    }
+    const res = await fetch('http://localhost:3000/addItem/'+idTbl, options)
+    getCoffeeTable();
+    detailsTable(idTbl);
 }

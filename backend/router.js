@@ -18,5 +18,7 @@ module.exports = function (app) {
     //     .put(productsCtrl.update)
     //     .delete(productsCtrl.delete);
 
+    // app.route('/addItem/:idTbl').get(tablesCtrl.addItem);
+
     app.route('/addItem/:idTbl').post(tablesCtrl.addItem);
 };

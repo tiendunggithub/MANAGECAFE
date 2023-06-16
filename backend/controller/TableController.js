@@ -62,15 +62,18 @@ module.exports = {
                 ('00' + date.getHours()).slice(-2) + ':' + 
                 ('00' + date.getMinutes()).slice(-2) + ':' + 
                 ('00' + date.getSeconds()).slice(-2);
-                console.log('date1: ', date);
             } else {
                 date = response[0].STARTTIME
             }
-            sql = "INSERT INTO `manage_cafe`.`table_details` (`PRODUCT`, `TABLE`, `STARTTIME`, `QUANTITY`) VALUES ('5', '1', ?, '10')";
+            sql = "INSERT INTO `manage_cafe`.`table_details` (`PRODUCT`, `TABLE`, `STARTTIME`, `QUANTITY`) VALUES (?, ?, ?, ?)";
             
-            db.query(sql,[date], (err, response) => {
+            db.query(sql, [req.body.idProd, id,date, req.body.quantity], (err, response) => {
                 if(err) throw err
-                res.json(response)
+                sql = "UPDATE coffee_table SET STATUS = '1' WHERE (ID = ? AND STATUS = '0')";
+                db.query(sql, [id], (err, response) => {
+                    if(err) throw err
+                    res.json(response)
+                })
             })
         })
     }

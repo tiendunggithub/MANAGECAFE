@@ -11,6 +11,7 @@
     flex-wrap: wrap;
     flex-direction: row;
     gap: 24px;
+    width: fit-content;
     padding: 12px 5px;
 }
 
@@ -121,12 +122,14 @@
     border-radius: 10px;
     overflow: hidden;
     width: 750px;
-    background-color: #67ff9f;
+    height: 666px;
+    /* background-color: #855B54; */
+    background-color: #A85B3C;
+    color: #fff;
     padding: 12px 10px;
     margin-top: 12px;
     transform-origin: right;
     transform: translateX(106%);
-    
 }
 
 .status-exist{
@@ -146,6 +149,15 @@
     text-align: center;
 }
 
+.table-status .status-header .btnClose {
+    background: none !important;
+    border: none !important;
+    color: #fff;
+    font-size: 22px;
+    padding: 0 12px;
+}
+
 .table-status table{
     width: 100%;
 }
+
